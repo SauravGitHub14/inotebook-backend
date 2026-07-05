@@ -8,7 +8,18 @@ connectToMongo();
 
 const app = express();
 
-app.use(cors());
+const cors = require("cors");
+
+app.use(
+    cors({
+        origin: [
+            "http://localhost:3000",
+            "https://inotebook-frontend-ruddy.vercel.app/"
+        ],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true
+    })
+);
 app.use(express.json());
 
 app.use("/api/auth", require("./routes/auth"));
